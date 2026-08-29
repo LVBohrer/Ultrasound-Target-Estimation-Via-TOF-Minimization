@@ -78,7 +78,7 @@ def GenerateTOFMatrix(transducerElementsCoordinates: np.ndarray, blockLength: fl
 
     return tofMatrix
 
-def TOFCost(optVars, transducerElementsCoordinates, blockLength, velocityBlock, velocityCouplingMedium, measuredTof, tol=1e-7):
+def TOFCost(optVars: np.ndarray, transducerElementsCoordinates: np.ndarray, blockLength: float, velocityBlock: float, velocityCouplingMedium: float, measuredTof: np.ndarray, tol: float = 1e-7) -> float:
     """
     Calculate the cost function for the time of flight (TOF) optimization problem, which measures the difference between the simulated TOF matrix and the measured TOF matrix.
 
