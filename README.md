@@ -86,7 +86,7 @@ This is implemented as `TOFCost(...)` in [estimator/CostFunctions.py](estimator/
 The target line parameters are found by minimizing the cost:
 
 $$
-(a^{*}, b^{*}) = \arg\min_{a,b} J(a,b)
+(a^{\*}, b^{\*}) = \arg{\min_{a,b} J(a,b)}
 $$
 
 The code uses `scipy.optimize.minimize` with an initial guess, typically assuming a near-zero angle and an intercept close to the block boundary.
