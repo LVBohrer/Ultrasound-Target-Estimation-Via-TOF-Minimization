@@ -73,7 +73,7 @@ The function `GenerateTOFMatrix(...)` repeats this for every transmitter-receive
 
 ### 4. Define the cost function
 
-The optimization objective compares the simulated TOF matrix with the measured matrix:
+The optimization objective compares the simulated TOF matrix with the measured matrix via an RMSE:
 
 $$
 J(a, b) = \sqrt{\sum_{i,j} \left(T_{sim}(i,j;a,b) - T_{meas}(i,j)\right)^2}
@@ -86,17 +86,14 @@ This is implemented as `TOFCost(...)` in [estimator/CostFunctions.py](estimator/
 The target line parameters are found by minimizing the cost:
 
 $$
-(a^*, b^*) = \arg\min_{a,b} J(a,b)
+(a^{*}, b^{*}) = \arg\min_{a,b} J(a,b)
 $$
 
 The code uses `scipy.optimize.minimize` with an initial guess, typically assuming a near-zero angle and an intercept close to the block boundary.
 
 ### 6. Visualize the result
 
-After optimization, the fitted target line is overlaid on a plot with the block and transducer positions. This allows a direct comparison between:
-- the true target geometry,
-- the measured data estimate,
-- the optimized simulated result.
+After optimization, the fitted target line is overlaid on a plot with the block and transducer positions. This allows a direct comparison between the optimized simulated result and the true target geometry.
 
 ## Example workflow
 
