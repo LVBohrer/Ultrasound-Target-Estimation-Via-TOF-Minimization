@@ -1,6 +1,6 @@
 # Ultrasound Target Estimation via TOF Minimization
 
-This project addresses the problem of estimating the position and angle of a reflecting target when ultrasonic waves propagate through an intermediate acoustic block before reaching the target and returning to the array.
+This project addresses the problem of estimating the position and angle of a reflecting target when ultrasonic waves propagate through an intermediate block before reaching the target and returning to the array.
 
 The goal is to infer the target geometry from measured time-of-flight (TOF) data, without directly observing the target in the coupling medium. The method models the propagation path through the block and the surrounding medium, then adjusts the target parameters to minimize the mismatch between simulated and measured TOFs.
 
@@ -31,7 +31,7 @@ For a transmitter-receiver pair, the propagation path is modeled as follows:
 3. It returns through the coupling medium to a second refraction point on the block.
 4. It travels through the block again to the receiving element.
 
-The total time of flight is approximated as:
+The total time of flight is calculated as:
 
 $$
 T = \frac{\|p_{tx} - p_{r1}\|}{v_{block}} + \frac{\|p_{r1} - p_{target}\| + \|p_{target} - p_{r2}\|}{v_{medium}} + \frac{\|p_{r2} - p_{rx}\|}{v_{block}}
