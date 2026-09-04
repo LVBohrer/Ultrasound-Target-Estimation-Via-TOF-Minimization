@@ -6,7 +6,11 @@ The goal is to infer the target geometry from measured time-of-flight (TOF) data
 
 ## Problem description
 
-A linear ultrasonic array is placed on one side of a block of material with thickness $L_b$. The acoustic wave first travels through the block, then reaches a reflector located in the coupling medium on the other side. Because the wave crosses two different media with different sound velocities, the physical path is refracted at the block surface and the reflector geometry must be estimated indirectly from the arrival times.
+A linear ultrasonic array is placed on one side of a block of material with thickness $L_b$. The acoustic wave first travels through the block, then reaches a reflector located in the coupling medium on the other side, as shown in the figure:
+
+<img src="figures/LabSetup.png" alt="LabSetup" width="550">
+
+Because the wave crosses two different media with different sound velocities, the physical path is refracted at the block surface and the reflector geometry must be estimated indirectly from the arrival times.
 
 In this repository, the target is represented as a straight line:
 
@@ -31,6 +35,10 @@ For a transmitter-receiver pair, the propagation path is modeled as follows:
 3. It returns through the coupling medium to a second refraction point on the block.
 4. It travels through the block again to the receiving element.
 
+As represented in the following figure.
+
+![ModelRepresentation](figures/ModelRepresentation.png)
+
 The total time of flight is calculated as:
 
 $$
@@ -48,11 +56,13 @@ The implementation in [estimator/CostFunctions.py](estimator/CostFunctions.py) d
 
 ## Method used in the code
 
-The code follows a TOF-minimization strategy:
+The code follows a TOF-minimization strategy. For the data acquisition, it was used the setup shown following figure.
 
 ### 1. Extract measured TOFs from the ultrasonic data
 
-The script in [estimator/example.py](estimator/example.py) loads a .m2k dataset, isolates a region of interest, and computes the echo peak time for each element using the Hilbert transform envelope.
+The script in [estimator/example.py](estimator/example.py) loads a .m2k dataset, isolates a region of interest, and computes the echo peak time for each element using the Hilbert transform envelope. The A and B scans of the data can be used to identify and isolate the Region Of Interest (ROI). In the following figure, the B-scan indicates that the ROI is between the 9000th and 9500th samples. The A-scan and its Hilbert transform are used to find the peak time.
+
+![AScanBScanExample](figures/AScanBScanExample.png)
 
 This produces a matrix of arrival times that represents the measured propagation times for the array elements.
 
@@ -94,6 +104,8 @@ The code uses `scipy.optimize.minimize` with an initial guess, typically assumin
 ### 6. Visualize the result
 
 After optimization, the fitted target line is overlaid on a plot with the block and transducer positions. This allows a direct comparison between the optimized simulated result and the true target geometry.
+
+![ResultsExample](figures/ResultsExample.png)
 
 ## Example workflow
 
